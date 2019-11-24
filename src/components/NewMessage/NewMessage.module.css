@@ -1,0 +1,25 @@
+.new__message {
+    width: 69%;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: calc(30.1%);
+    height: 147px;
+}
+.new__message textarea {
+    width: 95%;
+    display: block;
+    height: 50px;
+    margin: 20px 1%;
+    border: 1px solid #ccc;
+}
+
+.new__message button {
+    background: rgb(46, 212, 149);
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
+    margin: 0 5% 20px;
+    float: right;
+
+}
