@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/simple-chat/static/css/main.329b6e3a.chunk.css",
+    "main.js": "/simple-chat/static/js/main.08d7bb65.chunk.js",
+    "main.js.map": "/simple-chat/static/js/main.08d7bb65.chunk.js.map",
+    "runtime-main.js": "/simple-chat/static/js/runtime-main.bfb5af26.js",
+    "runtime-main.js.map": "/simple-chat/static/js/runtime-main.bfb5af26.js.map",
+    "static/js/2.26c632c1.chunk.js": "/simple-chat/static/js/2.26c632c1.chunk.js",
+    "static/js/2.26c632c1.chunk.js.map": "/simple-chat/static/js/2.26c632c1.chunk.js.map",
+    "index.html": "/simple-chat/index.html",
+    "precache-manifest.0ab148871621eb1edd95f1c367c815fe.js": "/simple-chat/precache-manifest.0ab148871621eb1edd95f1c367c815fe.js",
+    "service-worker.js": "/simple-chat/service-worker.js",
+    "static/css/main.329b6e3a.chunk.css.map": "/simple-chat/static/css/main.329b6e3a.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bfb5af26.js",
+    "static/js/2.26c632c1.chunk.js",
+    "static/css/main.329b6e3a.chunk.css",
+    "static/js/main.08d7bb65.chunk.js"
+  ]
+}
