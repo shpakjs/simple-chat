@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './NewChat.module.css';
 import { Button, TextField, Dialog, DialogContent, DialogTitle, Radio, Input,
-InputLabel, RadioGroup, FormControlLabel, FormControl, Select, MenuItem} from '@material-ui/core';
+InputLabel, RadioGroup, FormControlLabel, FormControl, Select, MenuItem, DialogActions} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -20,23 +20,6 @@ export default class FormDialog extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.onAddChat = this.onAddChat.bind(this);
   }
-  classes = makeStyles(theme => ({
-    formControl: {
-      margin: theme.spacing(3),
-      minWidth: 120,
-      maxWidth: 300,
-    },
-    chips: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    chip: {
-      margin: 2,
-    },
-    noLabel: {
-      marginTop: theme.spacing(3),
-    },
-  }))
 
   handlePrivacyChange(event){
     this.setState({ isPrivate: event.target.value });
@@ -86,8 +69,8 @@ export default class FormDialog extends React.Component {
         <button onClick={() => this.toggleModal(true)} className={styles.add__chat}>Add chat +</button>
         <Dialog open={this.state.isOpen} onClose={() => this.toggleModal(false)} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">New chat</DialogTitle>
-          <DialogContent>
-            <FormControl component="fieldset" className={this.classes.formControl} >
+          <DialogContent className={styles.dialogContent}>
+            <FormControl component="fieldset" className={styles.formControl} >
               <RadioGroup aria-label="privacy" name="privacy" value={this.state.isPrivate} onChange={event => this.handlePrivacyChange(event)}>                 
                   <FormControlLabel value="true" control={<Radio />} label="private" />
                   <FormControlLabel value="false" control={<Radio />} label="public" />
@@ -100,7 +83,7 @@ export default class FormDialog extends React.Component {
                   onChange={event => this.handleChatNameChange(event)}
                   fullWidth
               /> }
-              <FormControl className={this.classes.formControl}>
+              <FormControl className={styles.formControl}>
                 <InputLabel id="mutiple-name-label">Users</InputLabel>
                 <Select
                   labelId="mutiple-name-label"
@@ -119,8 +102,10 @@ export default class FormDialog extends React.Component {
                   ))}
                 </Select>
               </FormControl>
-              <Button type="submit" color="primary" onClick={this.onAddChat}>OK</Button>
           </FormControl>
+          <DialogActions>
+            <Button type="submit" color="primary" onClick={this.onAddChat}>OK</Button>
+          </DialogActions>
           </DialogContent>
         </Dialog>
       </div>

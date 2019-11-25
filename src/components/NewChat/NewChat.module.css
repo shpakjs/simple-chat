@@ -7,3 +7,9 @@
     right: 10px;
     top: 15px;
 }
+.dialogContent {
+    min-width: 300px;
+}
+.formControl {
+    width: 100%;
+}
