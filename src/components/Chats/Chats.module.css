@@ -5,7 +5,17 @@
     overflow: auto;
     border-right: 1px solid #ddd;
 }
-.chats__wrapper{
+.chats__wrapper {
     display: flex;
     width:100%;
+}
+.logo {
+    width: max-content;
+    height: 40px;
+    vertical-align: middle;
+    padding: 10px;
+}
+.logo img{
+    width: auto;
+    height: 100%;
 }

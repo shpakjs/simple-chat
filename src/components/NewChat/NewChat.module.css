@@ -1,0 +1,9 @@
+.add__chat {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #ff7819;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}

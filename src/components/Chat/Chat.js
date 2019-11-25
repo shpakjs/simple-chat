@@ -1,17 +1,15 @@
 import React from 'react';
 import styles from './Chat.module.css';
-import user from '../../assets/user.png'
+import publicChat from '../../assets/public.png';
+import privateChat from '../../assets/private.png';
 
-const Chat = ({getChatMessages, chat, users}) => {
-    const onChatSelected = function() {
-        getChatMessages(chat.id, 100, 0);
-    }
+const Chat = ({ id, caption, type, isSelected, onChatSelected }) => {
     return (
-        <div className={styles.chat}
-            id = {chat.id} 
-            onClick = { onChatSelected }>
-                <img className={ styles.user__photo } src={user} alt="user" />
-                <span className={ styles.chat__name }>{ chat.name }</span>
+        <div className={`${styles.chat} ${type === "1" ? styles.private: ''} ${isSelected ? styles.active : '' }`}
+            id = {id} 
+            onClick = { () => onChatSelected(id) }>
+                <img className={ styles.photo } src={ type === "2" ? publicChat : privateChat  } alt="user" />
+                <span className={ styles.name }>{ caption }</span>
         </div>
     );
 }

@@ -1,28 +1,44 @@
 import React from 'react';
 import ChatsView from '../components/Chats/Chats';
 import { chatApi } from '../api/requests';
+
 export default class Chats extends React.Component {
-    state = {
-        'chats': [],
-        'userId': 2,
-        'selectedChat': null,
-        'messages': []
+    constructor(props) {
+        super(props);
+        this.state = { 
+            'chats': [],
+            'selectedChat': null
+         };
+        this.addNewChat = this.addNewChat.bind(this);
+        this.selectChat = this.selectChat.bind(this);
     }
     componentDidMount() {
-        chatApi.getUserChats(2).then(chats => {
-            this.setState({chats});
-        });
+        chatApi.getUserChats(this.props.userId).then(chats =>  this.setState({ chats }));
     }
-    getChatMessages = async(chatId, messagesCount, messagesOffset) => {
-        let messages = await chatApi.getChatMessages(chatId, messagesCount, messagesOffset);
-        this.setState({ selectedChat: chatId, messages: messages });
+
+    selectChat(chatId) {
+        this.setState({ selectedChat: chatId });
     }
-    
+
+    async addNewChat(isPrivate, name, users) {
+        let usersWithCurrent = users + ',' + this.props.userId; //Current user by default in every chat he creates
+        let newChat;
+        if(isPrivate === 'true') {
+            newChat = await chatApi.createPersonalChat(usersWithCurrent);
+        } else {
+            newChat = await chatApi.createGroupChat(usersWithCurrent, name);
+        }
+        let chats = await chatApi.getUserChats(this.props.userId);
+        this.setState({ selectedChat: newChat.id, chats: chats });
+    } 
+
     render () {
         return <ChatsView 
             chats={ this.state.chats } 
-            getChatMessages={ this.getChatMessages } 
-            messages={ this.state.messages } 
-            userId={ this.state.userId }/>
+            users={ this.props.users }
+            userId={ this.props.userId }
+            chatId= { this.state.selectedChat }
+            selectChat = { this.selectChat }
+            addNewChat = { this.addNewChat }/>
     }
 }

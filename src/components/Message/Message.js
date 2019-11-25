@@ -8,9 +8,9 @@ const Message = (props) => {
                 id={props.id} 
                 className = {`
                     ${styles.message} 
-                    ${ props.senderId == props.userId ? styles.my : '' }`}>
+                    ${ props.isMy ? styles.my : '' }`}>
                 <div className = {styles.message__info}>
-                    <p className = {styles.author}>{props.senderId}</p>
+                    <p className = {styles.author}>{props.sender}</p>
                     <div className = {styles.time}>{props.timestamp}</div>
                 </div>
                 {props.message}

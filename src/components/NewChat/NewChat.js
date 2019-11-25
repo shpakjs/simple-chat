@@ -1,65 +1,129 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import styles from './NewChat.module.css';
+import { Button, TextField, Dialog, DialogContent, DialogTitle, Radio, Input,
+InputLabel, RadioGroup, FormControlLabel, FormControl, Select, MenuItem} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
 
-const useStyles = makeStyles(theme => ({
+
+export default class FormDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen : false,
+      isPrivate: 'true',
+      chatName: null,
+      users: null
+    };
+    this.handleChatNameChange = this.handleChatNameChange.bind(this);
+    this.handlePrivacyChange = this.handlePrivacyChange.bind(this);
+    this.handleUsersChange = this.handleUsersChange.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.onAddChat = this.onAddChat.bind(this);
+  }
+  classes = makeStyles(theme => ({
     formControl: {
       margin: theme.spacing(3),
+      minWidth: 120,
+      maxWidth: 300,
     },
-  }));
+    chips: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    chip: {
+      margin: 2,
+    },
+    noLabel: {
+      marginTop: theme.spacing(3),
+    },
+  }))
 
-export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
+  handlePrivacyChange(event){
+    this.setState({ isPrivate: event.target.value });
+  }
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  handleChatNameChange(event) {
+    this.setState({ chatName: event.target.value });
+  }
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  handleUsersChange(event) {
+    this.setState({ users: event.target.value.join(',') });
+  }
 
-  const classes = useStyles();
-  const [value, setValue] = React.useState('female');
+  toggleModal(isOpen){
+    if(isOpen){
+      this.setState({ isOpen });
+    } else {
+      this.setState({
+        isOpen : false,
+        isPrivate: 'true',
+        chatName: null,
+        users: null
+      });
+    }
+    
+  }
 
-  const handleChange = event => {
-    setValue(event.target.value);
-  };
+  onAddChat(){
+    this.props.addNewChat(this.state.isPrivate, this.state.chatName, this.state.users);
+    this.setState({ isOpen: false });
+  }
 
-  return (
-    <div>
-      <button onClick={handleClickOpen}>+</button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Add new chat</DialogTitle>
-        <DialogContent>
-          <FormControl component="fieldset" className={classes.formControl}>
-            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                <FormControlLabel value="public" control={<Radio />} label="public" />
-                <FormControlLabel value="private" control={<Radio />} label="private" />
-            </RadioGroup>
-            <TextField
-                margin="dense"
-                id="name"
-                label="Chat name"
-                fullWidth
-            />
-        </FormControl>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+  render () {
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+      PaperProps: {
+        style: {
+          maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+          width: 250,
+        },
+      },
+    };
+
+    return (
+      <div>
+        <button onClick={() => this.toggleModal(true)} className={styles.add__chat}>Add chat +</button>
+        <Dialog open={this.state.isOpen} onClose={() => this.toggleModal(false)} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">New chat</DialogTitle>
+          <DialogContent>
+            <FormControl component="fieldset" className={this.classes.formControl} >
+              <RadioGroup aria-label="privacy" name="privacy" value={this.state.isPrivate} onChange={event => this.handlePrivacyChange(event)}>                 
+                  <FormControlLabel value="true" control={<Radio />} label="private" />
+                  <FormControlLabel value="false" control={<Radio />} label="public" />
+              </RadioGroup>
+              { this.state.isPrivate === 'false' && <TextField
+                  margin="dense"
+                  id="name"
+                  label="Chat name"
+                  value={this.state.chatName || ''}
+                  onChange={event => this.handleChatNameChange(event)}
+                  fullWidth
+              /> }
+              <FormControl className={this.classes.formControl}>
+                <InputLabel id="mutiple-name-label">Users</InputLabel>
+                <Select
+                  labelId="mutiple-name-label"
+                  id="mutiple-name"
+                  multiple
+                  value={this.state.users ? this.state.users.split(',') : []}
+                  onChange={(event) => this.handleUsersChange(event)}
+                  input={<Input />}
+                  MenuProps={MenuProps}
+                  fullWidth
+                >
+                  {this.props.allUsers.map(user => (
+                    <MenuItem key={user.name} value={user.id} >
+                      {user.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <Button type="submit" color="primary" onClick={this.onAddChat}>OK</Button>
+          </FormControl>
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
+  }
 }
