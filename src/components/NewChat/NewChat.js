@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './NewChat.module.css';
 import { Button, TextField, Dialog, DialogContent, DialogTitle, Radio, Input,
 InputLabel, RadioGroup, FormControlLabel, FormControl, Select, MenuItem, DialogActions} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
 
 export default class FormDialog extends React.Component {
