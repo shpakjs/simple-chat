@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat component Chat component changed on click 1`] = `
+<div
+  className="chat private active"
+  id="2"
+  onClick={[Function]}
+>
+  <img
+    alt="user"
+    className="photo"
+    src="private.png"
+  />
+  <span
+    className="name"
+  >
+    I am test chat
+  </span>
+</div>
+`;
+
+exports[`Chat component Chat component changed on click 2`] = `
+<div
+  className="chat private active"
+  id="2"
+  onClick={[Function]}
+>
+  <img
+    alt="user"
+    className="photo"
+    src="private.png"
+  />
+  <span
+    className="name"
+  >
+    I am test chat
+  </span>
+</div>
+`;
