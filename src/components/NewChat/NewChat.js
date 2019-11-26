@@ -103,7 +103,7 @@ export default class FormDialog extends React.Component {
               </FormControl>
           </FormControl>
           <DialogActions>
-            <Button type="submit" color="primary" onClick={this.onAddChat}>OK</Button>
+            <Button id="addChat" color="primary" onClick={this.onAddChat}>OK</Button>
           </DialogActions>
           </DialogContent>
         </Dialog>
