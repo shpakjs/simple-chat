@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatsView from '../components/Chats/Chats';
 import { chatApi } from '../api/requests';
+import { Redirect } from 'react-router-dom';
 
 export default class Chats extends React.Component {
     constructor(props) {
@@ -32,13 +33,18 @@ export default class Chats extends React.Component {
         this.setState({ selectedChat: newChat.id, chats: chats });
     } 
 
+
     render () {
+        if(!this.props.userId) {
+            return <Redirect to={"/login"} />;
+        }
         return <ChatsView 
             chats={ this.state.chats } 
             users={ this.props.users }
             userId={ this.props.userId }
             chatId= { this.state.selectedChat }
             selectChat = { this.selectChat }
-            addNewChat = { this.addNewChat }/>
+            addNewChat = { this.addNewChat }
+            onLogout = { this.props.onLogout }/>
     }
 }

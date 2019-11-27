@@ -1,0 +1,50 @@
+h4 {
+    color: #444;
+    font-size: 26px;
+    font-weight: 200;
+    margin: 10px auto;
+}
+
+
+.login {
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    left: 0;
+}
+
+.login .login__form {
+    display: grid;
+    background: rgba(360,360,360,0.7);
+    width: 300px;
+    margin: 25vh auto;
+    box-shadow: 8px 5px 19px 3px rgba(0,0,0,0.5);
+}
+
+.login input {
+    display: block;
+    width: 70%;
+    margin: auto;
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #ddd;
+    background: rgba(360,360,360,0.75);
+    color: #444;
+}
+
+.login input:focus {
+    outline: none;
+    transition: .3s;
+    border: 1px solid #2c96ff;
+    background: rgba(360,360,360,0.9);
+}
+
+.login button {
+    background: #0080FF;
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
+    margin: 10px auto;
+}

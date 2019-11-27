@@ -25,6 +25,7 @@ const Chats = (props) => {
                     type= { chat.conversation.type }
                     isSelected = {chat.conversation.conversationId === props.chatId }/>
             })}
+            <button className={styles.logout} onClick={props.onLogout}>Log out</button>
         </div>
         { props.chatId && <ChatRoom
             chatInfo = { props.chats.find(chat => props.chatId === chat.conversation.conversationId)}
