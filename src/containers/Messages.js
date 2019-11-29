@@ -1,6 +1,7 @@
 import React from 'react';
 import MessagesView from '../components/Messages/Messages';
 import { chatApi } from '../api/requests';
+import Preloader from '../components/Preloader/Preloader';
 
 export default class Messages extends React.Component {
     constructor(props) {
@@ -10,7 +11,7 @@ export default class Messages extends React.Component {
          };
         this.sendMessage = this.sendMessage.bind(this);
     }
-    componentDidMount() {
+    componentWillMount() {
         chatApi.getChatMessages(this.props.chatId, 100, 0).then(messages => {
             this.setState({ messages: [...messages.reverse()] });
         });
@@ -36,11 +37,13 @@ export default class Messages extends React.Component {
 
 
     render () {
-        return <MessagesView 
+        return this.props.chatId 
+        ? <MessagesView 
             messages={ this.state.messages } 
             userId={ this.props.userId }
             sendMessage= { this.sendMessage }
             chatId= { this.props.chatId }
             allUsers = { this.props.allUsers }/>
+        : <Preloader />
     }
 }

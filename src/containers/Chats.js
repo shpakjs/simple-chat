@@ -2,6 +2,7 @@ import React from 'react';
 import ChatsView from '../components/Chats/Chats';
 import { chatApi } from '../api/requests';
 import { Redirect } from 'react-router-dom';
+import Preloader from '../components/Preloader/Preloader';
 
 export default class Chats extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export default class Chats extends React.Component {
         this.addNewChat = this.addNewChat.bind(this);
         this.selectChat = this.selectChat.bind(this);
     }
-    componentDidMount() {
+    componentWillMount() {
         chatApi.getUserChats(this.props.userId).then(chats =>  this.setState({ chats }));
     }
 
@@ -37,8 +38,9 @@ export default class Chats extends React.Component {
     render () {
         if(!this.props.userId) {
             return <Redirect to={"/login"} />;
-        }
-        return <ChatsView 
+        } 
+        return this.state.chats.length 
+        ? <ChatsView 
             chats={ this.state.chats } 
             users={ this.props.users }
             userId={ this.props.userId }
@@ -46,5 +48,6 @@ export default class Chats extends React.Component {
             selectChat = { this.selectChat }
             addNewChat = { this.addNewChat }
             onLogout = { this.props.onLogout }/>
+        : <Preloader />
     }
 }

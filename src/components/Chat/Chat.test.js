@@ -18,18 +18,4 @@ describe("Chat component", () => {
         expect(mockCallback.mock.calls.length).toBe(1);
     });
 
-    test('Chat component changed on click', () => {
-        const component = create(<Chat 
-            id="2" 
-            caption="I am test chat" 
-            type="1" 
-            isSelected="false" 
-            onChatSelected={() => {}}/>);
-        let tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
-        tree.props.onClick();
-        tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
-      });
-
 });

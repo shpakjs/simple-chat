@@ -7,12 +7,12 @@ import ChatRoom from '../ChatRoom/ChatRoom';
 import {getChatCaption} from '../../utils/utils';
 
 const Chats = (props) => {
-    
     const usersForSelector = props.users.filter(user => user.id !== props.userId); //All users besides current user
+
 
     return (<div className={styles.chats__wrapper}>
         <div className={styles.chats}>
-            <div className={styles.logo}>
+            <div className={styles.chats__header}>
                 <img src={logo} alt="logo" />
             </div>
             <NewChat  addNewChat={ props.addNewChat } allUsers={ usersForSelector }/>

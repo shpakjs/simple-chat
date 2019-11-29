@@ -11,7 +11,7 @@ class Login  extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         localStorage.removeItem("simpleChatUserId");
     }
 
